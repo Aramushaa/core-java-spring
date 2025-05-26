@@ -46,6 +46,8 @@ services:
       - ./properties/gatekeeper.properties:/opt/arrowhead-core/gatekeeper/application.properties
       - ./properties/gateway.properties:/opt/arrowhead-core/gateway/application.properties
       - ./properties/certificateauthority.properties:/opt/arrowhead-core/certificate-authority/application.properties
+      - ./certificates:/opt/arrowhead-core/certificates
+
     ports:
       - 8443:8443 # Service Registry
       - 8445:8445 # Authorization
@@ -54,6 +56,10 @@ services:
       - 8449:8449 # Gatekeeper
       - 8453:8453 # Gateway
       - 8448:8448 # Certificate Authority
+
+    extra_hosts:
+      - "arrowhead-core:127.0.0.1"
+      - "serviceregistry.testcloud2.aitia.arrowhead.eu:127.0.0.1"
 
 volumes:
   mysql:
